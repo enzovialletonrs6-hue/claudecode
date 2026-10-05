@@ -133,6 +133,69 @@ body {
   box-shadow: 1px 1px 0 var(--color-surligneur);
 }
 
+.bouton:disabled,
+.bouton[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 4px 4px 0 var(--color-surligneur);
+}
+
+/* Bouton secondaire : contour, pour ne laisser qu'un seul bouton plein par écran. */
+.bouton-secondaire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.75rem 1.1rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--color-encre);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  touch-action: manipulation;
+}
+.bouton-secondaire:hover {
+  background: var(--color-papier-fonce);
+}
+.bouton-secondaire:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.bouton-secondaire.danger {
+  border-color: var(--color-tampon);
+  color: var(--color-tampon);
+}
+
+/* Champ de saisie : 17px minimum pour éviter le zoom automatique sur iPhone. */
+.champ {
+  display: block;
+  width: 100%;
+  min-height: 3.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--color-trait);
+  background: var(--color-feuille);
+  color: var(--color-encre);
+  font-size: 1.0625rem;
+}
+.champ:focus {
+  outline: none;
+  border-color: var(--color-encre);
+}
+.champ[aria-invalid="true"] {
+  border-color: var(--color-tampon);
+}
+
+.lien {
+  text-decoration: underline;
+  text-decoration-color: var(--color-trait);
+  text-underline-offset: 4px;
+}
+.lien:hover {
+  text-decoration-color: var(--color-encre);
+}
+
 /* Filet pointillé façon ticket de caisse. */
 .pointilles {
   border-color: var(--color-trait);

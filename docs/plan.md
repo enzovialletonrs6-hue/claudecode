@@ -13,8 +13,8 @@ Tout le reste est hors périmètre sauf validation explicite.
 
 | # | Étape | État |
 |---|-------|------|
-| 1 | Landing en ligne (+ pages légales, 404, erreur, aperçus de liens) | en cours de mise en ligne |
-| 2 | Comptes (Supabase Auth, schéma, réglages, suppression de compte) | à faire |
+| 1 | Landing en ligne (+ pages légales, 404, erreur, aperçus de liens) | fait |
+| 2 | Comptes (Supabase Auth, schéma, réglages, suppression de compte) | code fait et testé ; configuration Supabase à faire ([guide](etape-2-supabase.md)) |
 | 3 | Relevé → détection → liste par coût annuel + onboarding | à faire |
 | 4 | Lettres de résiliation + total économisé | à faire |
 | 5 | Paiement Stripe (mode test), webhook, portail client | à faire |
@@ -34,13 +34,20 @@ Appliquées par défaut (recommandations du plan) en attendant confirmation :
 En attente de réponse :
 
 - Lecture des PDF : IA (Haiku ou Opus) / lecteur maison / pas de PDF au lancement.
-- Boutons « Ce n'est pas un abonnement » et « Je le garde ».
-- Validation du schéma de données (avant l'étape 2).
+- Boutons « Ce n'est pas un abonnement » et « Je le garde » (prévus dans le schéma :
+  statuts `ignored` et `keep`).
+
+Validé : schéma de données (`supabase/migrations/20261005000000_schema_initial.sql`).
 
 Décisions techniques :
 
 - Inscription email + mot de passe avec accès immédiat (le lien magique ouvrirait un autre
-  navigateur que celui de TikTok/Instagram) ; lien magique proposé à la connexion.
+  navigateur que celui de TikTok/Instagram). Connexion par mot de passe, ou par code reçu par
+  email (l'email contient aussi un bouton qui marche dans n'importe quel navigateur, via
+  `/auth/confirm?token_hash=…`). « Mot de passe oublié » = connexion par code, puis nouveau mot
+  de passe dans les réglages.
+- Le proxy (`proxy.ts`) ne tourne que sur `/app`, `/connexion` et `/inscription` : la landing
+  reste statique.
 - Le relevé n'est jamais stocké ; seuls les prélèvements réguliers détectés le sont.
 - L'accès payant n'est activé que par le webhook Stripe signé.
 - Mesure d'audience Umami (sans cookie, pas de bandeau).

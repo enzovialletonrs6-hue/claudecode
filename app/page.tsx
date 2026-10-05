@@ -77,7 +77,7 @@ function CtaBlock({ event }: { event: string }) {
 export default function Home() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader showLogin />
 
       <main className="flex-1">
         {/* 1. Promesse — mot pour mot celle des vidéos */}

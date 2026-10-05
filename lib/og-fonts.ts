@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-// Polices pour les images générées (aperçus de liens, icônes) : satori ne lit pas le woff2.
+// Polices pour les images générées (aperçus de liens, icônes) : satori ne lit pas le woff2.
 export async function loadOgFonts() {
   const dir = join(process.cwd(), "assets/fonts");
   const [bricolage, dmMono] = await Promise.all([

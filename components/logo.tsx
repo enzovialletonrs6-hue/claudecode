@@ -15,12 +15,12 @@ export function GhostGlyph({ className = "" }: { className?: string }) {
   );
 }
 
-export function Logo() {
+export function Logo({ href = "/" }: { href?: string }) {
   return (
     <Link
-      href="/"
+      href={href}
       className="inline-flex items-center gap-2 py-2 text-encre"
-      aria-label="Fantômes, retour à l'accueil"
+      aria-label={href === "/" ? "Fantômes, retour à l'accueil" : "Fantômes, retour à ton espace"}
     >
       <GhostGlyph className="h-7 w-7" />
       <span className="titre text-[1.4rem] leading-none">Fantômes</span>
