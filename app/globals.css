@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/* Palette resserrée : 2 couleurs (surligneur, tampon) + neutres papier/encre.
+   On retire la palette par défaut de Tailwind pour ne jamais en sortir. */
+@theme {
+  --color-*: initial;
+  --color-papier: #f6f1e6;
+  --color-feuille: #fcfaf4;
+  --color-papier-fonce: #ece4d2;
+  --color-trait: #d6ccb6;
+  --color-encre: #1b1a17;
+  --color-crayon: #6e685e;
+  --color-surligneur: #ffd84a;
+  --color-tampon: #c8361b;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-papier);
+  color: var(--color-encre);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: var(--color-surligneur);
+  color: var(--color-encre);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-encre);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Titres : très gras et un peu serrés (utilitaire, pour accepter les variantes). */
+@utility titre {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+/* Coup de surligneur dessiné à la main, qui suit le texte sur plusieurs lignes. */
+.surligne {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M1.5 5.5C14 3.6 31 4.6 48 3.9 66 3.2 84 4.3 98.6 3.4L99 16.6C82 18.2 63 16.4 45 17.4 28 18.3 13 16.8 1 18.1Z' fill='%23ffd84a'/%3E%3C/svg%3E");
+  background-size: 100% 78%;
+  background-position: 0 70%;
+  background-repeat: no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0 0.12em;
+  margin: 0 -0.06em;
+}
+
+/* Tampon « RÉSILIÉ ». */
+.tampon {
+  display: inline-block;
+  color: var(--color-tampon);
+  border: 2.5px solid currentColor;
+  outline: 1px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 3px;
+  padding: 0.1em 0.45em;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  transform: rotate(-8deg);
+  mix-blend-mode: multiply;
+}
+
+/* Montant barré à la main. */
+.barre {
+  position: relative;
+  white-space: nowrap;
+}
+.barre::after {
+  content: "";
+  position: absolute;
+  left: -6%;
+  right: -6%;
+  top: 50%;
+  height: 0.5em;
+  transform: translateY(-50%) rotate(-4deg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M1 6.5C20 4.8 40 5.6 58 4.4S88 3.6 99 3' stroke='%23c8361b' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+/* Bouton principal : encre pleine, ombre de surligneur nette (pas de flou). */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.5rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 0.75rem;
+  background: var(--color-encre);
+  color: var(--color-papier);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: 4px 4px 0 var(--color-surligneur);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+  touch-action: manipulation;
+}
+.bouton:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--color-surligneur);
+}
+.bouton:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--color-surligneur);
+}
+
+/* Filet pointillé façon ticket de caisse. */
+.pointilles {
+  border-color: var(--color-trait);
+  border-style: dashed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bouton,
+  .bouton:hover,
+  .bouton:active {
+    transition: none;
+    transform: none;
+  }
+}
